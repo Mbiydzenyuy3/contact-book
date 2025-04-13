@@ -1,4 +1,5 @@
 //add.mjs
+import { argv } from "yargs";
 import { addContact } from "../services/contactServices.mjs";
 
 export default {
@@ -15,8 +16,23 @@ export default {
     },
   },
   handler: async (argv) => {
-    const tagList = argv.tags ? argv.tags.split(",") : [];
-    await addContact({ ...argv, tags: tagList });
+    if (argv.phone.includes(",")) {
+      console.log("only one phone number is allowed");
+      process.exit(1);
+    }
+
+    // const tagList = argv.tags ? argv.tags.split(",") : [];
+    const tags = [];
+    if (argv.tags) {
+      tagList = argv.tags.split(",").map((tag) => tag.trim());
+
+      if (tagList.length < 1) {
+        console.log("Only one tag is allowed per contact");
+        process.exit(1);
+      }
+    }
+
+    await addContact({ ...argv, tags: tags });
     process.exit(0);
   },
 };

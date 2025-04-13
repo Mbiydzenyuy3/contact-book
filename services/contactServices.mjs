@@ -5,6 +5,17 @@ import { client as db, connectToDatabase } from "../database/database.mjs";
 await connectToDatabase();
 
 async function addContact({ name, phone, email, address, tags }) {
+  // check for existing contact with phone or email
+  const duplicate = await db.query(
+    `SELECT * FROM contacts WHERE name = $1 OR phone = $2`, [name, phone]
+  );
+
+  if (duplicate.rows.length > 0) {
+    console.log('Contact with this name and phone already exist')
+    return;
+  }
+
+  //Insert if no duplicate is found
   await db.query(
     "INSERT INTO contacts (name, phone, email, address, tags) VALUES ($1, $2, $3, $4, $5)",
     [name, phone, email, address, tags]
