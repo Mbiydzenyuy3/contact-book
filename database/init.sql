@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS contacts (
   name VARCHAR(100),
   phone VARCHAR(20),
   email VARCHAR(100),
-  notes TEXT
+  address TEXT
   tags TEXT[]
 );
