@@ -18,13 +18,9 @@ export default {
     }
 
     const updates = await promptUpdateFields(contact);
-    // const tags = updates.tags
-    //   ? updates.tags.split(",").map((t) => t.trim())
-    //   : contact.tags;
-
-    const tags = contact.tags;
-    if (updates.tags) {
-      tags = updates.tags.split(",").map((tag) => tag.trim());
+    const tags = contact.tag;
+    if (updates.tag) {
+      tags = updates.tag.split(",").map((tag) => tag.trim());
       if (tags.length > 1) {
         console.log("Only one tag is allowed per contact");
         process.exit(1);

@@ -9,18 +9,18 @@ function printHeader() {
 function printContact(contact) {
   console.log(chalk.yellow(`Name`), contact.name);
   console.log(chalk.green(`Phone:`), contact.phone);
-  console.log(chalk.blue(`Email`), contact.email);
+  console.log(chalk.blue.bold(`Email`), contact.email);
   console.log(chalk.blue(`Address`), contact.address);
 
-  if (contact.tags) {
-    console.log(chalk.pink(`Tags`), contact.tags.join(", "));
+  if (contact.tag) {
+    console.log(chalk.pink.bold(`Tag`), contact.tag.join(", "));
   }
   console.log();
 }
 
 function printTable(contacts) {
   const table = new Table({
-    head: ["ID", "Name", "Phone", "Email", "Address", "Tags"],
+    head: ["ID", "Name", "Phone", "Email", "Address", "Tag"],
     style: { head: ["cyan"] },
   });
 
@@ -32,7 +32,7 @@ function printTable(contacts) {
       contact.email,
       contact.address,
 
-      contact.tags ? contact.tags.join(", ") : "",
+      contact.tag ? contact.tag.join(", ") : "",
     ]);
   });
 

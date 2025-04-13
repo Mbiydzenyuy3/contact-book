@@ -5,5 +5,5 @@ CREATE TABLE IF NOT EXISTS contacts (
   phone VARCHAR(20) UNIQUE,
   email VARCHAR(100),
   address TEXT
-  tags TEXT[]
+  tag TEXT[]
 );

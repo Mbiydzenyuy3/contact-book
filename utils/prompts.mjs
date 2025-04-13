@@ -40,9 +40,9 @@ async function promptUpdateFields(contact) {
     },
     {
       type: "input",
-      name: "tags",
-      message: "Enter tags (comma-separated):",
-      default: contact.tags ? contact.tags.join(", ") : "",
+      name: "tag",
+      message: "Enter tag (comma-separated):",
+      default: contact.tag ? contact.tag.join(", ") : "",
     },
   ]);
 }

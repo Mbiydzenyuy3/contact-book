@@ -6,7 +6,7 @@ export default {
   command: "list",
   describe: "List all contacts",
   handler: async () => {
-    console.log("Listing contacts..."); // Add this log for debugging
+    console.log("Listing contacts..."); // Add this line for debugging
     const contacts = await getAllContacts();
     printHeader();
 
