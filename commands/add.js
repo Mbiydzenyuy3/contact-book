@@ -37,10 +37,10 @@ export default {
       process.exit(1);
     }
 
-    // if (name.length ===12 > 35) {
-    //   console.log("❌ Name must be 35 characters or less.");
-    //   process.exit(1);
-    // }
+    if (name.length > 35) {
+      console.log("❌ Name must be 35 characters or less.");
+      process.exit(1);
+    }
 
     if (await isNameTaken(name)) {
       console.log("❌ Name already exists. It must be unique.");
