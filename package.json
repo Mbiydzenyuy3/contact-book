@@ -1,11 +1,14 @@
 {
   "name": "contact-book",
   "version": "1.0.0",
+  "bin": {
+    "contactbook": "./app.js"
+  },
   "type": "module",
   "description": "",
-  "main": "app.mjs",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.mjs",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

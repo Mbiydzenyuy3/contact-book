@@ -1,12 +1,12 @@
 ### PROJECT TITLE
 
-This is a terminal-based contact book app to manage personal contacts with PostgreSQL as a backend
+This is a terminal-based contact book to manage personal contacts with PostgreSQL as a backend
 
 ## KEY FEATURES OF MY TOOL
 
--  Add new contacts (Name, Phone, Email, Notes, Tags)
+-  Add new contacts (Name, Phone, Email, Address, Tag)
 -  List all contacts
--  Search contacts by name, phone, or email
+-  Search contacts ID
 -  Update existing contacts
 -  Delete contacts safely (with confirmation)
 -  Persistent storage using PostgreSQL
