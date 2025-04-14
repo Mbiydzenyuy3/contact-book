@@ -1,8 +1,5 @@
-import {
-  findContactById,
-  deleteContact,
-} from "../services/contactServices.mjs";
-import { confirmAction } from "../utils/prompts.mjs";
+import { findContactById, deleteContact } from "../services/contactServices.js";
+import { confirmAction } from "../utils/prompts.js";
 
 export default {
   command: "delete <id>",

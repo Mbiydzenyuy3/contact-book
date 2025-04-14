@@ -1,6 +1,6 @@
 //list.mjs
-import { getAllContacts } from "../services/contactServices.mjs";
-import { printHeader, printTable } from "../utils/format.mjs";
+import { getAllContacts } from "../services/contactServices.js";
+import { printHeader, printTable } from "../utils/format.js";
 
 export default {
   command: "list",

@@ -1,8 +1,10 @@
 //contactServices.js
 
-import { client as db, connectToDatabase } from "../database/database.mjs";
+import { client as db, connectToDatabase } from "../database/database.js";
 
 await connectToDatabase();
+
+const contacts = []; // This would be replaced by real data store
 
 async function addContact({ name, phone, email, address, tag }) {
   // check for existing contact with phone or email
@@ -22,6 +24,11 @@ async function addContact({ name, phone, email, address, tag }) {
   );
   console.log("Contact added!");
 }
+
+export async function isNameTaken(name) {
+  return contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase());
+}
+
 
 async function getAllContacts() {
   const result = await db.query("SELECT * FROM contacts ORDER BY id ASC");

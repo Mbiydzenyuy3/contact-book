@@ -1,6 +1,6 @@
 //search.mjs
-import { searchContacts } from "../services/contactServices.mjs";
-import { printHeader, printTable } from "../utils/format.mjs";
+import { searchContacts } from "../services/contactServices.js";
+import { printHeader, printTable } from "../utils/format.js";
 
 export default {
   command: "search <keyword>",

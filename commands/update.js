@@ -1,9 +1,6 @@
 //update.mjs
-import {
-  findContactById,
-  updateContact,
-} from "../services/contactServices.mjs";
-import { promptUpdateFields } from "../utils/prompts.mjs";
+import { findContactById, updateContact } from "../services/contactServices.js";
+import { promptUpdateFields } from "../utils/prompts.js";
 
 export default {
   command: "update <id>",
@@ -12,22 +9,24 @@ export default {
     const contact = await findContactById(id);
     if (!contact) return console.log("Contact not found.");
 
-    if (updates.phone && updates.phone.include(",")) {
+    const updates = await promptUpdateFields(contact);
+
+    if (updates.phone && updates.phone.includes(",")) {
       console.log("Only one phone number is allowed");
       process.exit(1);
     }
 
-    const updates = await promptUpdateFields(contact);
-    const tags = contact.tag;
+    let tags = contact.tag;
     if (updates.tag) {
-      tags = updates.tag.split(",").map((tag) => tag.trim());
-      if (tags.length > 1) {
+      const newTags = updates.tag.split(",").map((tag) => tag.trim());
+      if (newTags.length > 1) {
         console.log("Only one tag is allowed per contact");
         process.exit(1);
       }
+      tags = newTags;
     }
 
-    await updateContact(id, { ...updates, tags });
+    await updateContact(id, { ...updates, tag: tags });
     process.exit(0);
   },
 };
