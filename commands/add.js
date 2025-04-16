@@ -1,5 +1,6 @@
-//add.mjs
+// add.js
 import { addContact, isNameTaken } from "../services/contactServices.js";
+import inquirer from "inquirer";
 
 export default {
   command: "add",
@@ -9,28 +10,41 @@ export default {
     phone: { demandOption: true, type: "string" },
     email: { type: "string" },
     address: { type: "string" },
-    tag: {
-      type: "string",
-      // describe: "Comma-separated tag",
-    },
+    tag: { type: "string" },
   },
   handler: async (argv) => {
-    const { name, phone, email } = argv;
-
-    if (argv.phone.includes(",")) {
-      console.log("only one phone number is allowed");
-      process.exit(1);
+    // 📦 If argv is not passed (interactive mode), prompt user manually
+    if (!argv || !argv.name) {
+      argv = await inquirer.prompt([
+        {
+          type: "input",
+          name: "name",
+          message: "Enter name:",
+        },
+        {
+          type: "input",
+          name: "phone",
+          message: "Enter phone number:",
+        },
+        {
+          type: "input",
+          name: "email",
+          message: "Enter email (optional):",
+        },
+        {
+          type: "input",
+          name: "address",
+          message: "Enter address (optional):",
+        },
+        {
+          type: "input",
+          name: "tag",
+          message: "Enter tag (optional):",
+        },
+      ]);
     }
 
-    let tag = [];
-    if (argv.tag) {
-      tag = argv.tag.split(",").map((t) => t.trim());
-
-      if (tag.length < 1) {
-        console.log("Only one tag is allowed per contact");
-        process.exit(1);
-      }
-    }
+    const { name, phone, email, address, tag } = argv;
 
     if (!name) {
       console.log("❌ Name is required.");
@@ -57,7 +71,14 @@ export default {
       process.exit(1);
     }
 
-    await addContact({ ...argv, tag: tag });
-    process.exit(0);
+    const tags = tag ? tag.split(",").map((t) => t.trim()) : [];
+
+    // if (tags.length > 1) {
+    //   console.log("❌ Only one tag is allowed.");
+    //   process.exit(1);
+    // }
+
+    await addContact({ name, phone, email, address, tag: tags });
+    console.log("✅ Contact added successfully!");
   },
 };
