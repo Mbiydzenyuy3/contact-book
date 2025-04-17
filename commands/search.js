@@ -16,7 +16,7 @@ export default {
       printTable(results);
     }
 
-    clear();
+    // clear();
 
     process.exit(0);
   },
